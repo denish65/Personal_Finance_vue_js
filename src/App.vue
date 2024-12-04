@@ -1,15 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  <!-- <CustomPage  to="/custom" msg="Welcome to Your Vue.js App"/> -->
+  <ExpensesApp  to="/custom" msg="Welcome to Your Vue.js App"/>
+
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+// import CustomPage from './components/CustomPage.vue'
+import ExpensesApp from './components/ExpensesApp.vue'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // HelloWorld,
+    ExpensesApp
   }
 }
 </script>
