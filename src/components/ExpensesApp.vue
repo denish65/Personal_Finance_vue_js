@@ -17,6 +17,7 @@
               <th>Item Name</th>
               <th>Payment For</th>
               <th>Payment Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -34,6 +35,9 @@
               <td>{{ expense.item_name }}</td>
               <td>{{ expense.payment_for }}</td>
               <td>{{ expense.payment_status }}</td>
+              <td>
+                <button @click="deleteExpense(expense.id)">Delete</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -44,6 +48,7 @@
         <div class="modal-content">
           <h5>Add New Expense</h5>
           <form @submit.prevent="handleFormSubmit">
+            <!-- Form Fields -->
             <div>
               <label>First Name:</label>
               <input type="text" v-model="formData.first_name" />
@@ -163,6 +168,22 @@
         }
       };
   
+      const deleteExpense = async (id) => {
+        if (confirm("Are you sure you want to delete this expense?")) {
+          try {
+            await axios.post(`http://localhost:8000/api/admin/deleteExpense/${id}`, null, {
+              headers: {
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')?.content,
+              },
+            });
+            alert("Expense deleted successfully!");
+            fetchExpenses();
+          } catch (error) {
+            console.error("Error deleting expense:", error);
+          }
+        }
+      };
+  
       onMounted(() => {
         fetchExpenses();
       });
@@ -174,6 +195,7 @@
         fetchExpenses,
         handleFileChange,
         handleFormSubmit,
+        deleteExpense,
       };
     },
   };
